@@ -36,7 +36,7 @@ export default class Product extends Component {
 
   fetchProducts = async (_id) => {
     if (!getStore('productList').length) {
-      const res = await fetchGet(`http://localhost:3000/data/productData.json`);
+      const res = await fetchGet(`/data/productData.json`);
       const products = await res.json();
       localStorage.setItem(
         'productList',
@@ -77,7 +77,6 @@ export default class Product extends Component {
   render() {
     return (
       <Container>
-        {this.state.product.id}
         <ProductCard product={this.state.product} />
         <RandomButton ref={this.randomRef}>
           <IconsNextBtn />
