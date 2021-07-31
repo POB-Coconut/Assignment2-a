@@ -37,10 +37,14 @@ Mr.Camel : 고객들이 원하는 상품 목록을 위한 사용자의 상품 �
 ## 🎬 기능구현 데모
 
 ![](https://i.imgur.com/orXqwTF.gif)
+![화면 기록 2021-08-01 오전 5 31 17 mov](https://user-images.githubusercontent.com/71919983/127751942-008e05b9-1b6a-4fc0-abef-005ab3f433cc.gif)
 
-![](https://i.imgur.com/86YRmTu.gif)
+
+
 
 ## 👍🏻 구현 기능 상세
+사용자는 랜덤한 상품들을 보며 관심없는 상품을 표시하고  
+관심없는 상품에서 제외된 상품들을 브랜드별,가격별 필터링을 한 목록을 볼 수 있다.
 
 ### 1. 기본 요구 사항
 
