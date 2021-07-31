@@ -1,6 +1,9 @@
 # Wanted Front-end onBoarding # 2
 
-> ## 🔗 Deploy Link : 
+## Demo Link
+🔗 Product Page : https://elegant-haibt-8fc815.netlify.app/product
+
+🔗 RecentList Page : https://elegant-haibt-8fc815.netlify.app/recentList
 
 ## 💬 프로젝트 개요
 Mr.Camel : 고객들이 원하는 상품 목록을 위한 사용자의 상품 조회 이력 제작
