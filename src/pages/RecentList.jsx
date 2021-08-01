@@ -5,7 +5,6 @@ import ProductCard from '../components/ProductCard';
 
 export default class RecentList extends Component {
   state = {
-    recentProducts: [],
     recentFiltered: [],
     brandList: [],
     isUnlike: '',
@@ -13,7 +12,6 @@ export default class RecentList extends Component {
 
   componentDidMount() {
     this.setState({
-      recentProducts: getStore('recentViewed'),
       recentFiltered: getStore('recentViewed'),
       brandList: this.setBrandList(),
       isUnlike: false,
@@ -36,14 +34,14 @@ export default class RecentList extends Component {
 
   onClickBrand = (e) => {
     const clickedBrand = e.target.innerText;
-    const { brandList, recentProducts } = this.state;
+    const { brandList } = this.state;
     if (clickedBrand === MSG.ALL_BRAND) {
       brandList.forEach((brand) => {
         if (brand.name === clickedBrand && !brand.isFilter)
           brand.isFilter = true;
         else if (brand.name !== clickedBrand) brand.isFilter = false;
       });
-      this.setState({ recentFiltered: recentProducts });
+      this.setState({ recentFiltered: getStore('recentViewed') });
     } else {
       brandList.forEach((brand) => {
         if (brand.name === clickedBrand) brand.isFilter = !brand.isFilter;
@@ -59,8 +57,7 @@ export default class RecentList extends Component {
   };
 
   setIsRouting = (id) => {
-    const { recentProducts } = this.state;
-    recentProducts.forEach((product) => {
+    getStore('recentViewed').forEach((product) => {
       if (product.id === id)
         if (product.unlike) alert(MSG.WARNING);
         else this.props.history.push({ pathname: `/product`, state: id });
@@ -79,29 +76,31 @@ export default class RecentList extends Component {
   };
 
   setUnlikeFilter = (isChecked) => {
-    const { recentProducts, recentFiltered } = this.state;
+    const { recentFiltered } = this.state;
     if (isChecked) {
       const unlikeFilteredList = recentFiltered.filter(
         (card) => card.unlike === false
       );
       this.setState({ recentFiltered: unlikeFilteredList });
-    } else this.setState({ recentFiltered: recentProducts });
+    } else this.setState({ recentFiltered: getStore('recentViewed') });
   };
 
   setBrandFilter = () => {
-    const { recentProducts, brandList } = this.state;
+    const { brandList } = this.state;
 
     const filterBrand = brandList
       .filter((brand) => brand.isFilter)
       .map((brand) => brand.name);
 
-    const filteredProducts = recentProducts.filter((card) =>
+    const filteredProducts = getStore('recentViewed').filter((card) =>
       filterBrand.includes(card.brand)
     );
 
     this.setState({
       recentFiltered:
-        filteredProducts.length > 0 ? filteredProducts : recentProducts,
+        filteredProducts.length > 0
+          ? filteredProducts
+          : getStore('recentViewed'),
     });
   };
 
@@ -115,6 +114,7 @@ export default class RecentList extends Component {
 
   setHighPriceOrder = () => {
     const { recentFiltered } = this.state;
+
     const highOrderedList = recentFiltered.sort((a, b) => {
       return parseInt(b.price) - parseInt(a.price);
     });
